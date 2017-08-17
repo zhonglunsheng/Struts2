@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.multipart.maxSize" value="20000000"></constant>
+	<constant name="struts.ognl.allowStaticMethodAccess" value="true"></constant> 
+	<package name="UserAction" extends="struts-default">
+		<interceptors>
+			<interceptor name="userInterceptor" class="com.lipop.Interceptor.UserInterceptor"></interceptor>
+			<interceptor-stack name="loginInterceptor">
+				<interceptor-ref name="userInterceptor"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors> 
+		
+		<global-results>
+			<result name="error">error.jsp</result>
+		</global-results>
+		<action name="user" class="com.lipop.action.UserAction">
+			<result name="success">success.jsp</result>
+		</action>
+		<action name="girl" class="com.lipop.action.GirlAction">
+			<result name="success">girl.jsp</result>
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>
+		</action>
+		<action name="value" class="com.lipop.action.ValueAction">
+			<result name="success">value.jsp</result>
+		</action>
+		<action name="file" class="com.lipop.action.FileAction">
+			<result name="success">success.jsp</result>
+			<result name="input">input.jsp</result>
+			<interceptor-ref name="fileUpload">
+				<param name="allowedTypes">image/bmp,image/x-png,image/gif,image/jpg,image/jpeg</param>
+				<param name="maximumSize">81101</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+		<action name="down" class="com.lipop.action.DownAction">
+			<result type="stream">
+				<param name="contentDisposition">attachment;filename=${fileName}</param>
+			</result>
+		</action>
+		<action name="student" class="com.lipop.action.StudentAction">
+			<result name="success">success.jsp</result>
+			<interceptor-ref name="tokenSession"></interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+	</package>
+</struts><!--comment-->
