@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+   <constant name="struts.enable.DynamicMethodInvocation" value="true" />
+   <package name="helloWorld" extends="struts-default">
+	    <global-results>
+	    	<result name="msg">404.jsp</result>
+	    </global-results>
+	    
+   		<action name="*_*" class="com.lipop.action.{1}Action" method="{2}">
+   			<result name="success" type="dispatcher">hobby</result>
+   			<result name="chain" type="chain">hobby</result>
+   			<result name="rc" type="redirectAction">hobby</result>
+   			<result name="error">error.jsp</result>
+   		</action>
+   		
+   		<action name="hobby" class="com.lipop.action.HobbyAction">
+   			<result name="success">success.jsp</result>
+   			<result name="error">error.jsp</result>
+   		</action>
+   		
+   		<action name="add" class="com.lipop.action.AddAction">
+   			<result name="success">success.jsp</result>
+   			<result name="error">error.jsp</result>
+   		</action>
+   </package>
+</struts>
