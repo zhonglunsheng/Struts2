@@ -1,6 +1,6 @@
 
 # Struts2
-Struts2学习code（小锋教学）
+Struts2学习code
 
 第一节 ：Struts2  简介
 -------------
